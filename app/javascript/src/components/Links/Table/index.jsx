@@ -3,7 +3,7 @@ import React from "react";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-const Table = ({ data, destroyTask, updateTask }) => {
+const Table = ({ data }) => {
   return (
     <div className="flex flex-col mt-10 ">
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
