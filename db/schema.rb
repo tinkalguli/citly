@@ -14,6 +14,10 @@ ActiveRecord::Schema.define(version: 2021_04_07_192043) do
 
   create_table "links", force: :cascade do |t|
     t.string "original_url", null: false
+    t.string "shortened_url", null: false
+    t.string "slug", null: false
+    t.boolean "is_pinned", default: false
+    t.integer "clicked", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
