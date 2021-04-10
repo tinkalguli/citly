@@ -3,26 +3,19 @@ import React from "react";
 import Input from "components/Input";
 import Button from "components/Button";
 
-const LinkForm = ({
-  type = "create",
-  title,
-  setTitle,
-  loading,
-  handleSubmit,
-}) => {
+const LinkForm = ({ link, setLink, loading, handleSubmit }) => {
   return (
-    <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
-      <Input
-        label="Title"
-        placeholder="Docs Revamp"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <Button
-        type="submit"
-        buttonText={type === "create" ? "Create Link" : "Update Link"}
-        loading={loading}
-      />
+    <form className="max-w-2xl mx-auto flex mt-10" onSubmit={handleSubmit}>
+      <div className="w-10/12">
+        <Input
+          placeholder="Enter a Url to shorten..."
+          value={link}
+          onChange={e => setLink(e.target.value)}
+        />
+      </div>
+      <div className="w-2/12 flex justify-end">
+        <Button type="submit" buttonText="Shorten!" loading={loading} />
+      </div>
     </form>
   );
 };

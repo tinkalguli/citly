@@ -3,11 +3,12 @@ import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
 import ListLinks from "components/Links/ListLinks";
-import Loader from "components/Loader";
+import PageLoader from "components/PageLoader";
 import linksApi from "apis/links";
 import { logger } from "common/logger";
+import CreateTask from "components/Links/CreateLink";
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const [links, setlinks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,13 +30,14 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="w-screen h-screen">
-        <Loader />
+        <PageLoader />
       </div>
     );
   }
 
   return (
     <Container>
+      <CreateTask history={history} />
       {either(isNil, isEmpty)(links) ? (
         <h1 className="text-xl leading-5 text-center">
           You have no links assigned 😔

@@ -1,8 +1,8 @@
 import React from "react";
 import Table from "./Table";
 
-const ListTasks = ({ data }) => {
+const ListLinks = ({ data }) => {
   return <Table data={data} />;
 };
 
-export default ListTasks;
+export default ListLinks;

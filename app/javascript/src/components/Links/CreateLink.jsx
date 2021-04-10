@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import Container from "components/Container";
-import TaskForm from "components/Tasks/Form/TaskForm";
-import tasksApi from "apis/tasks";
+import LinkForm from "components/Links/Form/LinkForm";
+import linksApi from "apis/links";
+import { logger } from "common/logger";
 
-const CreateTask = ({ history }) => {
-  const [title, setTitle] = useState("");
+const CreateLink = () => {
+  const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      await tasksApi.create({ task: { title } });
+      await linksApi.create({ link: { original_url: link } });
       setLoading(false);
-      history.push("/dashboard");
     } catch (error) {
       logger.error(error);
       setLoading(false);
@@ -20,14 +19,8 @@ const CreateTask = ({ history }) => {
   };
 
   return (
-    <Container>
-      <TaskForm
-        setTitle={setTitle}
-        loading={loading}
-        handleSubmit={handleSubmit}
-      />
-    </Container>
+    <LinkForm setLink={setLink} loading={loading} handleSubmit={handleSubmit} />
   );
 };
 
-export default CreateTask;
+export default CreateLink;

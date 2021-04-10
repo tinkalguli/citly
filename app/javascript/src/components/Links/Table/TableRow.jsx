@@ -1,39 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableRow = ({ data, destroyTask, updateTask }) => {
+const TableRow = ({ data }) => {
   return (
-    <tbody className="bg-white divide-y divide-gray-200">
+    <tbody className="bg-white divide-y divide-gray-200 rounded-b">
       {data.map(rowData => (
-        <tr key={rowData.title}>
+        <tr key={rowData.id}>
           <td
-            className="px-6 py-4 text-sm font-medium
-            leading-5 text-bb-gray whitespace-no-wrap"
+            className="px-6 py-4 text-2xl font-medium text-center
+            leading-5 text-bb-gray whitespace-no-wrap bg-gray-100"
           >
-            {rowData.title}
+            <i
+              className={`ri-information-fill align-middle hover:text-purple-500 ${
+                rowData.is_pinned ? "text-purple-700" : "text-gray-500"
+              } `}
+            ></i>
           </td>
           <td
-            className="px-6 py-4 text-sm font-medium
-            leading-5 text-bb-gray whitespace-no-wrap"
+            className="px-6 py-4 text-md break-all
+            leading-5 text-bb-gray max-w-xs"
           >
-            {rowData.user_id}
+            {rowData.original_url}
           </td>
           <td
-            className="px-6 py-4 text-sm font-medium
-            leading-5 text-right cursor-pointer"
+            className="px-6 py-4 text-md break-all
+            leading-5 text-bb-gray max-w-xs"
           >
-            <a
-              className="text-bb-purple text-opacity-50
-              hover:text-opacity-100"
-            >
-              Edit
-            </a>
+            {rowData.shortened_url}
           </td>
           <td
-            className="px-6 py-4 text-sm font-medium
-            leading-5 text-right cursor-pointer"
+            className="px-6 py-4 text-md font-medium text-center
+            leading-5 text-bb-gray whitespace-no-wrap bg-gray-100"
           >
-            <a className=" hover:text-bb-red">Delete</a>
+            {rowData.clicked}
           </td>
         </tr>
       ))}

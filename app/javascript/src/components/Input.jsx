@@ -3,37 +3,24 @@ import PropTypes from "prop-types";
 
 const Input = ({
   type = "text",
-  label,
   value,
   onChange,
   placeholder,
   required = true,
 }) => {
   return (
-    <div className="mt-6">
-      {label && (
-        <label
-          className="block text-sm font-medium
-              leading-5 text-bb-gray-700"
-        >
-          {label}
-        </label>
-      )}
-      <div className="mt-1 rounded-md shadow-sm">
-        <input
-          type={type}
-          required={required}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className="block w-full px-3 py-2 placeholder-gray-400
-          transition duration-150 ease-in-out border
-          border-gray-300 rounded-md appearance-none
+    <input
+      type={type}
+      required={required}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className="block w-full px-3 py-2 placeholder-gray-500
+          transition duration-150 ease-in-out rounded
+          appearance-none shadow-sm border
           focus:outline-none focus:shadow-outline-blue
-          focus:border-blue-300 sm:text-sm sm:leading-5"
-        />
-      </div>
-    </div>
+          focus:border-purple-400 sm:text-sm sm:leading-5"
+    />
   );
 };
 
