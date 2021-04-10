@@ -13,7 +13,7 @@ const Button = ({ type = "button", buttonText, onClick, loading }) => {
     loading ? "pointer-events-none cursor-not-allowed bg-purple-500" : ""
     }`}
     >
-      {buttonText}
+      {loading ? "Loading..." : buttonText}
     </button>
   );
 };

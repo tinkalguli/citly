@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableRow = ({ data }) => {
+const TableRow = ({ data, handlePinned }) => {
   return (
     <tbody className="bg-white divide-y divide-gray-200 rounded-b">
       {data.map(rowData => (
@@ -11,22 +11,36 @@ const TableRow = ({ data }) => {
             leading-5 text-bb-gray whitespace-no-wrap bg-gray-100"
           >
             <i
-              className={`ri-information-fill align-middle hover:text-purple-500 ${
-                rowData.is_pinned ? "text-purple-700" : "text-gray-500"
-              } `}
+              className={`ri-pushpin-2-fill align-middle cursor-pointer
+              hover:text-purple-500 ${
+        rowData.is_pinned ? "text-purple-700" : "text-gray-500"
+        } `}
+              onClick={() => handlePinned(rowData.id)}
             ></i>
           </td>
           <td
-            className="px-6 py-4 text-md break-all
+            className="px-6 py-4 text-md break-all 
             leading-5 text-bb-gray max-w-xs"
           >
-            {rowData.original_url}
+            <a
+              href={rowData.original_url}
+              target="_blank"
+              className="hover:underline cursor-pointer" rel="noreferrer"
+            >
+              {rowData.original_url}
+            </a>
           </td>
           <td
             className="px-6 py-4 text-md break-all
             leading-5 text-bb-gray max-w-xs"
           >
-            {rowData.shortened_url}
+            <a
+              href={rowData.shortened_url}
+              target="_blank"
+              className="hover:underline cursor-pointer" rel="noreferrer"
+            >
+              {rowData.shortened_url}
+            </a>
           </td>
           <td
             className="px-6 py-4 text-md font-medium text-center

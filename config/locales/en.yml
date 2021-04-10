@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  link_format_error: "URL should start with http or https"
+  successfully_created: "Shortened URL created successfully!"
+  successfully_updated: "Shortened URL updated successfully!"

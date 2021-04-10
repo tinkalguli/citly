@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
 import ListLinks from "components/Links/ListLinks";
@@ -8,14 +7,37 @@ import linksApi from "apis/links";
 import { logger } from "common/logger";
 import CreateTask from "components/Links/CreateLink";
 
-const Dashboard = ({ history }) => {
-  const [links, setlinks] = useState([]);
+const Dashboard = () => {
+  const [links, setLinks] = useState([]);
+  const [link, setLink] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    try {
+      await linksApi.create({ link: { original_url: link } });
+      fetchLinks();
+      setLoading(false);
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
+
+  const handlePinned = async id => {
+    try {
+      await linksApi.update(id);
+      fetchLinks();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 
   const fetchLinks = async () => {
     try {
       const response = await linksApi.list();
-      setlinks(response.data.links);
+      setLinks(response.data.links);
+      setLink("");
       setLoading(false);
     } catch (error) {
       logger.error(error);
@@ -37,14 +59,8 @@ const Dashboard = ({ history }) => {
 
   return (
     <Container>
-      <CreateTask history={history} />
-      {either(isNil, isEmpty)(links) ? (
-        <h1 className="text-xl leading-5 text-center">
-          You have no links assigned 😔
-        </h1>
-      ) : (
-        <ListLinks data={links} />
-      )}
+      <CreateTask handleSubmit={handleSubmit} setLink={setLink} link={link} />
+      <ListLinks data={links} handlePinned={handlePinned} />
     </Container>
   );
 };

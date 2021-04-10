@@ -1,25 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import LinkForm from "components/Links/Form/LinkForm";
-import linksApi from "apis/links";
-import { logger } from "common/logger";
 
-const CreateLink = () => {
-  const [link, setLink] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-    try {
-      await linksApi.create({ link: { original_url: link } });
-      setLoading(false);
-    } catch (error) {
-      logger.error(error);
-      setLoading(false);
-    }
-  };
-
+const CreateLink = ({ setLink, handleSubmit, loading, link }) => {
   return (
-    <LinkForm setLink={setLink} loading={loading} handleSubmit={handleSubmit} />
+    <LinkForm
+      setLink={setLink}
+      link={link}
+      loading={loading}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
