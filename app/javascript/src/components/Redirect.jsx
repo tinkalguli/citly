@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import linksApi from "apis/links";
 import { logger } from "common/logger";
+import PageLoader from "components/PageLoader";
 
 const Redirect = ({ history, match }) => {
   const slug = match.params.slug;
@@ -28,11 +29,7 @@ const Redirect = ({ history, match }) => {
     }
   }, [url]);
 
-  return (
-    <h1 className="mt-20 text-5xl text-center text-purple-500">
-      Redirecting...
-    </h1>
-  );
+  return <PageLoader />;
 };
 
 export default Redirect;

@@ -1,5 +1,5 @@
 import React from "react";
-import { toast, Slide } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ToastrComponent = ({ type, message }) => {
   let icon;
@@ -29,7 +29,7 @@ const ToastrComponent = ({ type, message }) => {
 const showToastr = message => {
   toast.success(<ToastrComponent type="success" message={message} />, {
     position: toast.POSITION.TOP_RIGHT,
-    transition: Slide,
+    autoClose: false,
   });
 };
 
@@ -39,7 +39,7 @@ const showErrorToastr = error => {
   const errorMessage = isError(error) ? error.message : error;
   toast.error(<ToastrComponent type="error" message={errorMessage} />, {
     position: toast.POSITION.TOP_RIGHT,
-    transition: Slide,
+    autoClose: false,
   });
 };
 
