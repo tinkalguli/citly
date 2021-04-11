@@ -20,13 +20,18 @@ const handleSuccessResponse = response => {
 };
 
 const handleErrorResponse = error => {
-  Toastr.error(
-    error.response?.data?.errors ||
-      error.response?.data?.notice ||
-      error.message ||
-      error.notice ||
-      "Something went wrong!"
-  );
+  if (error.response?.data?.info) {
+    Toastr.info(error.response?.data?.info);
+  } else {
+    Toastr.error(
+      error.response?.data?.errors ||
+        error.response?.data?.notice ||
+        error.message ||
+        error.notice ||
+        "Something went wrong!"
+    );
+  }
+
   if (error.response?.status === 423) {
     window.location.href = "/";
   }

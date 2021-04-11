@@ -43,9 +43,18 @@ const showErrorToastr = error => {
   });
 };
 
+const showInfoToastr = info => {
+  const message = info;
+  toast.info(<ToastrComponent type="info" message={message} />, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: false,
+  });
+};
+
 export const Toastr = {
   success: showToastr,
   error: showErrorToastr,
+  info: showInfoToastr,
 };
 
 export default Toastr;
