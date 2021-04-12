@@ -10,10 +10,12 @@ import CreateTask from "components/Links/CreateLink";
 const Dashboard = () => {
   const [links, setLinks] = useState([]);
   const [link, setLink] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   const handleSubmit = async event => {
     event.preventDefault();
+    setLoading(true);
     try {
       await linksApi.create({ link: { original_url: link } });
       fetchLinks();
@@ -38,10 +40,10 @@ const Dashboard = () => {
       const response = await linksApi.list();
       setLinks(response.data.links);
       setLink("");
-      setLoading(false);
+      setPageLoading(false);
     } catch (error) {
       logger.error(error);
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 
@@ -49,7 +51,7 @@ const Dashboard = () => {
     fetchLinks();
   }, []);
 
-  if (loading) {
+  if (pageLoading) {
     return (
       <div className="w-screen h-screen">
         <PageLoader />
@@ -59,7 +61,12 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <CreateTask handleSubmit={handleSubmit} setLink={setLink} link={link} />
+      <CreateTask
+        handleSubmit={handleSubmit}
+        setLink={setLink}
+        link={link}
+        loading={loading}
+      />
       <ListLinks data={links} handlePinned={handlePinned} />
     </Container>
   );
