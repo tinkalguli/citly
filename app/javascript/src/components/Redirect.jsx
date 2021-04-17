@@ -6,14 +6,17 @@ import PageLoader from "components/PageLoader";
 const Redirect = ({ history, match }) => {
   const slug = match.params.slug;
   const [url, setUrl] = useState("");
+  const [noMatch, setNoMatch] = useState(false);
 
   const handleRedirect = async slug => {
     try {
       const responds = await linksApi.show(slug);
-      setUrl(responds.data.link.original_url || "no-match");
+      const originalUrl = responds.data.link.original_url;
+      setUrl(originalUrl);
+      if (!originalUrl) setNoMatch(true);
     } catch (error) {
       logger.error(error);
-      setUrl("no-match");
+      setNoMatch(true);
     }
   };
 
@@ -22,7 +25,7 @@ const Redirect = ({ history, match }) => {
   }, []);
 
   useEffect(() => {
-    if (url === "no-match") {
+    if (noMatch) {
       history.push("/no/match");
     } else if (url) {
       window.location.href = url;

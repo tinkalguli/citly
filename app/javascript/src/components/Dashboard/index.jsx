@@ -35,6 +35,16 @@ const Dashboard = () => {
     }
   };
 
+  const handleClicked = async slug => {
+    try {
+      const responds = await linksApi.show(slug);
+      window.open(responds.data.link.original_url);
+      fetchLinks();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   const fetchLinks = async () => {
     try {
       const response = await linksApi.list();
@@ -67,7 +77,11 @@ const Dashboard = () => {
         link={link}
         loading={loading}
       />
-      <ListLinks data={links} handlePinned={handlePinned} />
+      <ListLinks
+        data={links}
+        handlePinned={handlePinned}
+        handleClicked={handleClicked}
+      />
     </Container>
   );
 };

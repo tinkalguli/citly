@@ -10,6 +10,14 @@ class LinksController < ApplicationController
 
   def index
     render status: :ok, json: { links: @links }
+    # render status: :ok, text: @links.to_csv
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: @links }
+    #   format.csv { send_data @links.to_csv }
+    # end
+
+    # send_data @links.to_csv, filename: "cars-#{Date.today}.csv"
   end
 
   def create

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableRow = ({ data, handlePinned }) => {
+const TableRow = ({ data, handlePinned, handleClicked }) => {
   return (
     <tbody className="bg-white divide-y divide-gray-200 rounded-b">
       {data.map(rowData => (
@@ -25,7 +25,8 @@ const TableRow = ({ data, handlePinned }) => {
             <a
               href={rowData.original_url}
               target="_blank"
-              className="hover:underline cursor-pointer" rel="noreferrer"
+              className="hover:underline cursor-pointer"
+              rel="noreferrer"
             >
               {rowData.original_url}
             </a>
@@ -35,9 +36,10 @@ const TableRow = ({ data, handlePinned }) => {
             leading-5 text-bb-gray max-w-xs"
           >
             <a
-              href={rowData.shortened_url}
+              onClick={() => handleClicked(rowData.slug)}
               target="_blank"
-              className="hover:underline cursor-pointer" rel="noreferrer"
+              className="hover:underline cursor-pointer"
+              rel="noreferrer"
             >
               {rowData.shortened_url}
             </a>
