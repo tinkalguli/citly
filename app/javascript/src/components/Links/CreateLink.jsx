@@ -28,7 +28,7 @@ const CreateLink = ({ setLink, handleSubmit, loading, link }) => {
       <Button
         type="button"
         buttonText="📥 Reports"
-        reportLoading={reportLoading}
+        loading={reportLoading}
         onClick={handleReport}
       />
     </div>
