@@ -13,10 +13,12 @@ class Link < ApplicationRecord
   validates :slug, presence: true
 
   def self.to_csv
-    CSV.generate do |csv|
-      csv << column_names
+    attributes = %w{original_url shortened_url clicked is_pinned}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
       all.each do |link|
-        csv << link.attributes.values_at(*column_names)
+        csv << attributes.map { |attr| link.send(attr) }
       end
     end
   end

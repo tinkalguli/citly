@@ -10,14 +10,6 @@ class LinksController < ApplicationController
 
   def index
     render status: :ok, json: { links: @links }
-    # render status: :ok, text: @links.to_csv
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: @links }
-    #   format.csv { send_data @links.to_csv }
-    # end
-
-    # send_data @links.to_csv, filename: "cars-#{Date.today}.csv"
   end
 
   def create
@@ -71,12 +63,6 @@ class LinksController < ApplicationController
       errors = @link.errors.full_messages
       render status: :unprocessable_entity, json: { errors: errors }
     end
-  end
-
-  def load_links
-    @links = Link.order(is_pinned: :desc, created_at: :desc)
-    rescue ActiveRecord::RecordNotFound => errors
-      render json: {errors: errors}
   end
 
   def generate_slug
