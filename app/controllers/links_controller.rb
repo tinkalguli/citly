@@ -67,14 +67,10 @@ class LinksController < ApplicationController
 
   def generate_slug
     @slug = SecureRandom.uuid[0..5]
-    rescue ActiveRecord::RecordNotFound => errors
-      render json: {errors: errors}
   end
 
   def shortened_url
     @shortened_url = "#{request.base_url}/#{@slug}"
-    rescue ActiveRecord::RecordNotFound => errors
-      render json: {errors: errors}
   end
 
   def validate_url
