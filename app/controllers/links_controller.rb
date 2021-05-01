@@ -54,8 +54,7 @@ class LinksController < ApplicationController
 
   def load_link_by_slug
     @link = Link.find_by(slug: params[:slug])
-    rescue ActiveRecord::RecordNotFound => errors
-      render json: {errors: errors}
+    render json: {errors: t('link_not_found_error')} unless @link
   end
 
   def update_click
@@ -67,6 +66,8 @@ class LinksController < ApplicationController
 
   def generate_slug
     @slug = SecureRandom.uuid[0..5]
+    link = Link.find_by(slug: @slug)
+    generate_slug() if link
   end
 
   def shortened_url

@@ -32,5 +32,6 @@
 en:
   link_format_error: "URL should start with http or https"
   link_already_exist: "URL already exist"
+  link_not_found_error: "URL not found"
   successfully_created: "Shortened URL created successfully!"
   successfully_updated: "Shortened URL updated successfully!"
